@@ -1,5 +1,11 @@
 
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class Employee(AbstractUser):
+    class Meta:
+        verbose_name = "employee"
+        verbose_name_plural = "employees"
 
 class Book(models.Model):
     title = models.CharField(max_length=200)

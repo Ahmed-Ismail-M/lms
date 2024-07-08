@@ -78,11 +78,11 @@ WSGI_APPLICATION = "lms.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
-        'PORT': os.environ.get('DATABASE_PORT'),
+        'NAME': os.environ.get('DATABASE_NAME','postgres'),
+        'USER': os.environ.get('DATABASE_USER','postgres'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD','admin'),
+        'HOST': os.environ.get('DATABASE_HOST','localhost'),
+        'PORT': os.environ.get('DATABASE_PORT', 5432),
     }
 }
 
@@ -127,3 +127,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+AUTH_USER_MODEL = 'library.Employee'
