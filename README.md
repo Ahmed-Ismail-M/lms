@@ -96,11 +96,46 @@ Log in using a registered username and password.
     cookies: sessionid:your_session_id
 
     X-CSRFToken: your_csrf_token
+    
 
     **Response**:
 
     204 book_id: Successfully deleted.
     
     404 Not Found: Book not found.
+
+- **Endpoint: /api/v1/books/{id}/borrow/**
+
+    Method: POST
+
+    Description: Brrow a book.
+
+    Headers:
+
+    cookies: sessionid: your_session_id
+
+    X-CSRFToken: your_csrf_token
+
+    **Request Body**:
+
+    ```json
+    {
+    "borrower_name":"Any Name"
+    }
+    ```
+
+    **Response**:
+
+    201 
+    
+    ```json
+    {
+    "id": 1,
+    "borrower_name": "Ahmed",
+    "borrow_date": "2024-07-08",
+    "return_date": null,
+    "book": 2
+    }
+    ```
 
 ### Use The same pattern for borrow-records
