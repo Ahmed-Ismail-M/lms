@@ -13,11 +13,19 @@ from django.contrib.auth import login
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    
+    @method_decorator(auth_required)
+    @method_decorator(allowed_users(["Employee"]))
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
     @method_decorator(auth_required)
+    @method_decorator(allowed_users(["Employee"]))
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
+    @method_decorator(auth_required)
+    @method_decorator(allowed_users(["Employee"]))
     @action(detail=True, methods=['post'])
     def borrow(self, request, pk=None):
         book = self.get_object()
@@ -33,6 +41,8 @@ class BookViewSet(viewsets.ModelViewSet):
         book.save()
         return Response(BorrowRecordSerializer(borrow_record).data, status=status.HTTP_201_CREATED)
 
+    @method_decorator(auth_required)
+    @method_decorator(allowed_users(["Employee"]))
     @action(detail=True, methods=['post'])
     def return_book(self, request, pk=None):
         book = self.get_object()
